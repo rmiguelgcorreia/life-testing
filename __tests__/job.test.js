@@ -1,5 +1,4 @@
 const { Job } = require("../src/Job");
-const { Person } = require("../src/Person");
 
 describe("Job", () => {
 
@@ -7,7 +6,9 @@ describe("Job", () => {
 
     beforeEach(() => {
         job = new Job("Developer", 100000);
-        person = new Person("Miguel", 25);
+        person = {
+            name: "Miguel"
+        };
     });
 
     it("creates an instance of job with a given role and salary", () => {
@@ -24,5 +25,6 @@ describe("Job", () => {
 
         expect(job.advertising).toBe(false);
         expect(job.acceptedCandidate).toStrictEqual([person]);
+        expect(job.acceptedCandidate[0].name).toBe("Miguel");
     });
 });

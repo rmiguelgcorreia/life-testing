@@ -1,6 +1,4 @@
 const { Person } = require("../src/Person");
-const { Job } = require("../src/Job");
-const { House } = require("../src/House");
 
 describe("Person", () => {
 
@@ -8,8 +6,16 @@ describe("Person", () => {
 
     beforeEach(() => {
         person = new Person("Diego", 25);
-        job = new Job("Developer", 100000);
-        cottage = new House(true, 250000);
+        job = {
+            role: "Developer",
+            salary: 100000,
+        }
+
+        cottage = {
+            onSale: true,
+            price: 250000,
+            isBought: jest.fn()
+        }
     });
 
     it("creates an instance of person with a given name and age", () => {
@@ -49,5 +55,6 @@ describe("Person", () => {
         person.buyHouse(cottage);
 
         expect(person.ownedHouses).toEqual([cottage]);
+        expect(cottage.isBought).toHaveBeenCalledWith(person);
     });
 })

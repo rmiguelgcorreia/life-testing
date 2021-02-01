@@ -1,6 +1,4 @@
 const { House } = require("../src/House");
-const { Person } = require("../src/Person");
-const { Job } = require("../src/Job");
 
 describe("House", () => {
 
@@ -8,8 +6,10 @@ describe("House", () => {
 
     beforeEach(() => {
         cottage = new House(true, 250000);
-        person = new Person("Miguel", 25);
-        job = new Job("Developer", 100000);
+
+        person = {
+            savings: 300000
+        };
     });
 
     it("creates an instance of House, set for sale at an initial cost", () => {
@@ -23,10 +23,6 @@ describe("House", () => {
     });
 
     it("can be bought by a person", () => {
-        person.getAJob(job);
-        person.work();
-        person.work();
-        person.work();
         cottage.isBought(person);
 
         expect(cottage.owner).toBe(person);
